@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -11,6 +12,7 @@ namespace Examen
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Hello world!");
         }
     }
 
@@ -18,10 +20,20 @@ namespace Examen
     {
         private int id_examen;
         private DateTime date;
-        private int temps;
-        private String matiere;
-        Exercice Exercice;
-
+        private int duree;
+        private String titre;
+        private bool ferme;
+        private Reponse reponse;
+        private LinkedList<Question> question = new LinkedList<Question>();
+        public void setFerme(bool s)
+        {
+            ferme = s;
+            
+        }
+        public bool getFerme()
+        {
+            return ferme;
+        }
         public void setIdExam(int id)
         {
             id_examen = id;
@@ -38,71 +50,21 @@ namespace Examen
         {
             return date;    
         }
-        public void setTemps(int t)
+        public void setDuree(int t)
         {
-            temps = t;
+            duree = t;
         }
-        public int getTemps()
+        public int getDuree()
         {
-            return temps;   
+            return duree;   
         }
-        public void setMatiere(String m)
+        public void setTitre(String t)
         {
-            matiere = m;
+            titre = t;
         }
-        public String getMatiere()
+        public String getTitre()
         {
-            return matiere;
-        }
-    }
-
-    class QCM
-    {
-
-        private int id_qcm;
-
-        public void setIdQCM(int id)
-        {
-            id_qcm = id;
-        }
-        public int getIdQCM()
-        {
-            return id_qcm;
-        }
-    }
-
-    class Exercice
-    {
-
-        private int id_exercice;
-        private int num_exercice;
-        private String type;
-
-        public 
-        public void setIdExercice(int id)
-        {
-            id_exercice = id;
-        }
-        public int getIdExercice()
-        {
-            return id_exercice;
-        }
-        public void setNumExercice(int num)
-        {
-            num_exercice = num;
-        }
-        public int getNumExercice()
-        {
-            return num_exercice;
-        }
-
-        public void setType(String t)
-        {
-            type = t;
-        }
-        public String getType()
-        {
-            return type;
+            return titre;
         }
     }
 
@@ -111,6 +73,21 @@ namespace Examen
 
         private int id_question;
         private int num_question;
+        private float note;
+
+        public Question(String question, Reponse reponse)
+        {
+
+        }
+        public void setNote(float n)
+        {
+            note = n;
+        }
+
+        public float getNote()
+        {
+            return note;
+        }
         public void setIdQuestion(int id)
         {
             id_question = id;
@@ -130,20 +107,62 @@ namespace Examen
             return num_question;
         }
     }
+
+    class QCM : Question
+    {
+        public QCM(string question, Reponse reponse, Proposition proposition) : base(question, reponse)
+        {
+        }
+    }
+
+    class Proposition { 
+        private int id_proposition;
+        private string titre;
+        private int note;
+        public void setIdProposition(int num)
+        {
+            id_proposition = num;
+        }
+
+        public int getIdProposition()
+        {
+            return id_proposition;
+        }
+        public void setTitre(String t)
+        {
+            titre = t;
+        }
+
+        public String getTitre()
+        {
+            return titre;
+        }
+        public void setNote(int n)
+        {
+            note = n;
+        }
+
+        public int getNote()
+        {
+            return note;
+        }
+    }
+
     class Reponse
     {
 
         private int id_reponse;
-        private int num_reponse;
+        private String titre;
+        private int note;
 
-        public void setNumReponse(int num)
+        public void setTitre(String t)
         {
-            num_reponse = num;
+            titre = t;
         }
 
-        public int getNumQuestion()
+        public String getTitre()
         {
-            return num_reponse;
+            return titre;
         }
 
         public void setIdReponse(int id)
@@ -154,6 +173,16 @@ namespace Examen
         public int getIdReponse()
         {
             return id_reponse;
+        }
+
+        public void setNote(int n)
+        {
+            note = n;
+        }
+
+        public int getNote()
+        {
+            return note;
         }
     }
 }
